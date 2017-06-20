@@ -35,3 +35,4 @@ cd <install dir>
 tar -xvzf unicornFind.tar 
 ./unicornFind/bin/unicornfind /infile.txt "(0,0,0)", 10, /outfile.txt 
 ```
+You can also run from the build environment by using "./build/scripts/unicornFind <args>" however for this to work you must place a symbolic link in the ./build directory of lib->libs. This used to work on its own prior to gradle 4.0 if I remember.
