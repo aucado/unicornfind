@@ -15,8 +15,8 @@ Usage: command <input> <"point"> <quantity> <output>
              The output file will be created if it does not exist or overwritten if it does exist.
 ```
 ### Design Notes
-The input file is read sequentially and each coordinate is read from the input file only once in O(n) time. The smallest values encountered are maintained in a java  PriorityQueue. As such the enque and dequeuing times are O(log(n)) where n is the quantity desired to be maintained. As such each time and element is added an enqueu and deque operation occurs.
-Thus the worst case number of operations would be the one per record in the file if all of the points were stored sorted furthest away from the origin selected or the quantity if there opposite were true. 
+The input file is read sequentially and each coordinate is read from the input file only once in O(n) time. The smallest values encountered are maintained in a java  PriorityQueue. As such the enque and dequeuing times are O(log(n)) where n is the quantity desired to be maintained. Each time an element is added an enque, deque and poll operation occurs.
+Thus the worst case number of operations would be one per record in the file if all of the points were stored sorted furthest away from the origin selected. The best case would be the quantity asked for there opposite were true. 
 
 #### Build Notes
 This is a java 1.8 project built using gradle 4.0. To build:
