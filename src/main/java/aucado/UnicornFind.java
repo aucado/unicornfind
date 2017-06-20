@@ -111,15 +111,6 @@ public class UnicornFind {
         @Override
         public int compare(Location l1, Location l2) {
             return (l1.distance() < l2.distance()) ? 1 : -1;
-           /*
-            if(l1.distance() < l2.distance()) {
-                return 1;
-            }
-            if(l1.distance > l2.distance) {
-                return -1;
-            }
-            return 0;
-            */
         }
     }
     
@@ -165,30 +156,23 @@ public class UnicornFind {
         /**
          * Print closest location coordinates to stdout in ascending order 
          */
-        public void print() {
-            Location a[] = new Location[pq.size()];
-            a = pq.toArray(a);
-            // print in reverse order so closest are first in outfile
-            for(int i = a.length-1; i >= 0; --i)
-                System.out.println(a[i].toString());
+        public void printAndClear() {
+            while (pq.size() > 0)
+                System.out.println(pq.poll().toString());
         }
 
-        public void printVector() {
-            Location a[] = new Location[pq.size()];
-            a = pq.toArray(a);
+        public void printVectorAndClear() {
             DecimalFormat format = new DecimalFormat("######.000");
-            // print in reverse order so closest are first in outfile
-            for(int i = a.length-1; i >= 0; --i)
-                System.out.println(format.format(a[i].distance()) + ", " + a[i].toString());
+            while (pq.size() > 0) {
+                Location l = pq.poll();
+                System.out.println(format.format(l.distance()) + ", " + l.toString());
+            }
         }
 
-        public String toString() {
-            Location a[] = new Location[pq.size()];
-            a = pq.toArray(a);
+        public String toStringAndClear() {
             String s = new String();
-            // print in reverse order so closest are first in outfile
-            for(int i = a.length-1; i >= 0; --i)
-                s += a[i].toString();
+            while (pq.size() > 0)
+                s += pq.poll().toString();
             return s;
         }
         public void clear() {pq.clear();}
@@ -218,7 +202,7 @@ public class UnicornFind {
                 }
             }
         }
-        ul.print();
+        ul.printAndClear();
     }
 
     /**
