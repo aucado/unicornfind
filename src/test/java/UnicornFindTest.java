@@ -173,17 +173,17 @@ public class UnicornFindTest {
         UnicornFind.UnicornLocator finder = ucf.new UnicornLocator(origin, quantity);
         finder.add(ucf.new Point("(1,0,0)"));
         finder.add(ucf.new Point("(2,0,0)"));
-        assertEquals(expected, finder.toString());
+        assertEquals(expected, finder.toStringAndClear());
 
         finder.clear();
         finder.add(ucf.new Point("(2,0,0)"));
         finder.add(ucf.new Point("(1,0,0)"));
-        assertEquals(expected, finder.toString());
+        assertEquals(expected, finder.toStringAndClear());
 
         finder.clear();
         finder.add(ucf.new Point("(1,0,0)"));
         finder.add(ucf.new Point("(1,0,0)"));
-        assertEquals(expected, finder.toString());
+        assertEquals(expected, finder.toStringAndClear());
     }
     @Test public void testFindUnicornsSameDistances() {
         UnicornFind ucf = new UnicornFind();
@@ -198,19 +198,19 @@ public class UnicornFindTest {
         finder.add(ucf.new Point("(2,0,0)"));
         finder.add(ucf.new Point("(2,0,0)"));
         finder.add(ucf.new Point("(3,0,0)"));
-        assertEquals(expected, finder.toString());
+        assertEquals(expected, finder.toStringAndClear());
 
         finder.clear();
         finder.add(ucf.new Point("(3,0,0)"));
         finder.add(ucf.new Point("(2,0,0)"));
         finder.add(ucf.new Point("(2,0,0)"));
-        assertEquals(expected, finder.toString());
+        assertEquals(expected, finder.toStringAndClear());
 
         finder.clear();
         finder.add(ucf.new Point("(2,0,0)"));
         finder.add(ucf.new Point("(3,0,0)"));
         finder.add(ucf.new Point("(2,0,0)"));
-        assertEquals(expected, finder.toString());
+        assertEquals(expected, finder.toStringAndClear());
      }
      @Test public void testFindUnicornsBestCase() {
         UnicornFind ucf = new UnicornFind();
@@ -219,13 +219,13 @@ public class UnicornFindTest {
         assertEquals("valid is true", true, origin.isValid());
 
         String expected;
-        expected = "(1,0,0)(2,0,0)";
+        expected = "(2,0,0)(1,0,0)";
 
         UnicornFind.UnicornLocator finder = ucf.new UnicornLocator(origin, quantity);
         finder.add(ucf.new Point("(1,0,0)"));
         finder.add(ucf.new Point("(2,0,0)"));
         finder.add(ucf.new Point("(3,0,0)"));
-        assertEquals(expected, finder.toString());
+        assertEquals(expected, finder.toStringAndClear());
     }
     @Test public void testFindUnicornsWorstCase() {
         UnicornFind ucf = new UnicornFind();
@@ -234,13 +234,13 @@ public class UnicornFindTest {
         assertEquals("valid is true", true, origin.isValid());
 
         String expected;
-        expected = "(1,0,0)(2,0,0)";
+        expected = "(2,0,0)(1,0,0)";
 
         UnicornFind.UnicornLocator finder = ucf.new UnicornLocator(origin, quantity);
         finder.add(ucf.new Point("(3,0,0)"));
         finder.add(ucf.new Point("(2,0,0)"));
         finder.add(ucf.new Point("(1,0,0)"));
-        assertEquals(expected, finder.toString());
+        assertEquals(expected, finder.toStringAndClear());
     }
     @Test public void testFindUnicornsLessPresentThanQuantity() {
         UnicornFind ucf = new UnicornFind();
@@ -253,7 +253,7 @@ public class UnicornFindTest {
 
         UnicornFind.UnicornLocator finder = ucf.new UnicornLocator(origin, quantity);
         finder.add(ucf.new Point("(3,0,0)"));
-        assertEquals(expected, finder.toString());
+        assertEquals(expected, finder.toStringAndClear());
     }
     @Test public void testFindUnicornsFirstInStay() {
         UnicornFind ucf = new UnicornFind();
@@ -262,13 +262,54 @@ public class UnicornFindTest {
         assertEquals("valid is true", true, origin.isValid());
 
         String expected;
-        expected = "(1,0,0)(3,0,0)";
+        expected = "(3,0,0)(1,0,0)";
 
         UnicornFind.UnicornLocator finder = ucf.new UnicornLocator(origin, quantity);
         finder.add(ucf.new Point("(1,0,0)"));
         finder.add(ucf.new Point("(3,0,0)"));
         finder.add(ucf.new Point("(-3,0,0)"));
         finder.add(ucf.new Point("(0,3,0)"));
-        assertEquals(expected, finder.toString());
+        assertEquals(expected, finder.toStringAndClear());
+    }
+    @Test public void testFindUnicornsAtOrigin() {
+        UnicornFind ucf = new UnicornFind();
+        int quantity = 3;
+        UnicornFind.Point origin = ucf.new Point( "(0,0,0)" );
+        assertEquals("valid is true", true, origin.isValid());
+
+        String expected;
+        expected = "(1,0,0)(0,0,0)(0,0,0)";
+
+        UnicornFind.UnicornLocator finder = ucf.new UnicornLocator(origin, quantity);
+        finder.add(ucf.new Point("(1,0,0)"));
+        finder.add(ucf.new Point("(0,0,0)"));
+        finder.add(ucf.new Point("(0,0,0)"));
+        finder.add(ucf.new Point("(9,0,0)"));
+        assertEquals(expected, finder.toStringAndClear());
+    }
+
+    @Test public void testFindUnicorns() {
+        UnicornFind ucf = new UnicornFind();
+        int quantity = 6;
+        UnicornFind.Point origin = ucf.new Point( "(0,0,0)" );
+        assertEquals("valid is true", true, origin.isValid());
+
+        String expected;
+        expected = "(4,0,0)(4,0,0)(3,0,0)(2,0,0)(1,0,0)(0,0,0)";
+
+        UnicornFind.UnicornLocator finder = ucf.new UnicornLocator(origin, quantity);
+        finder.add(ucf.new Point("(2,0,0)"));
+        finder.add(ucf.new Point("(6,0,0)"));
+        finder.add(ucf.new Point("(3,0,0)"));
+        finder.add(ucf.new Point("(4,0,0)"));
+        finder.add(ucf.new Point("(1,0,0)"));
+        finder.add(ucf.new Point("(4,0,0)"));
+        finder.add(ucf.new Point("(8,0,0)"));
+        finder.add(ucf.new Point("(9,0,0)"));
+        finder.add(ucf.new Point("(5,0,0)"));
+        finder.add(ucf.new Point("(7,0,0)"));
+        finder.add(ucf.new Point("(7,0,0)"));
+        finder.add(ucf.new Point("(0,0,0)"));
+        assertEquals(expected, finder.toStringAndClear());
     }
 }
