@@ -15,7 +15,7 @@ Usage: command <input> <"point"> <quantity> <output>
              The output file will be created if it does not exist or overwritten if it does exist.
 ```
 ### Design Notes
-The input file is read sequentially and each coordinate is read from the input file only once in O(n) time. The smallest values encountered are maintained in a java  PriorityQueue. As such the enque and dequeuing times are O(log(n)) where n is the quantity desired to be maintained. Each time an element is added an enque, deque and poll operation occurs.
+The input file is read sequentially and each coordinate is read from the input file only once in O(n) time. The smallest values encountered are maintained in a java  PriorityQueue. As such the enque and dequeuing times are O(log(n)) where n is the quantity desired to be maintained. Each time an element is added an enque and deque operation occurs. A constant time poll() oeration is also done.
 Thus the worst case number of operations would be one per record in the file if all of the points were stored sorted furthest away from the origin selected. The best case would be the quantity asked for there opposite were true. 
 
 #### Build Notes
