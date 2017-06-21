@@ -14,6 +14,7 @@ Usage: command <input> <"point"> <quantity> <output>
              Each line consists of a point in the format (x,y,z) where x,y and z are integers in the range of -999999 to 999999
              The output file will be created if it does not exist or overwritten if it does exist.
 ```
+For example: $ unicornFind /tmp/infile.txt "(0,0,0" 100, /tmp/outfile.txt
 ### Design Notes
 The input file is read sequentially and each coordinate is read from the input file only once in O(n) time. The smallest values encountered are maintained in a java  PriorityQueue. As such the enque and dequeuing times are O(log(n)) where n is the quantity desired to be maintained. Each time an element is added an enque and deque operation occurs. A constant time poll() oeration is also done.
 Thus the worst case number of operations would be one per record in the file if all of the points were stored sorted furthest away from the origin selected. The best case would be the quantity asked for there opposite were true. 
@@ -33,6 +34,6 @@ To create an installation tarball to install and run from the command line use:
 cp ./build/Distributions/unicornFind.tar <install dir>
 cd <install dir>
 tar -xvzf unicornFind.tar 
-./unicornFind/bin/unicornfind /infile.txt "(0,0,0)", 10, /outfile.txt 
+./unicornFind/bin/unicornfind /Users/netapp/infile.txt "(0,0,0)", 10, /Users/netapp/outfile.txt 
 ```
 You can also run from the build environment by using "./build/scripts/unicornFind <args>" however for this to work you must place a symbolic link in the ./build directory of lib->libs. This used to work on its own prior to gradle 4.0 if I remember.
