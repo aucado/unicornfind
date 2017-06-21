@@ -1,5 +1,5 @@
 # unicornfind
-Unicornfind is a java command that reads 3d cartesian coordinates from a file and keeps track of the n closest coordinates to a specified point. The usage follows.
+Unicornfind is a java command line application that reads 3d cartesian coordinates from a file and keeps track of the n closest coordinates to a specified point. The usage follows.
 
 ### Usage
 ```
@@ -14,13 +14,15 @@ Usage: command <input> <"point"> <quantity> <output>
              Each line consists of a point in the format (x,y,z) where x,y and z are integers in the range of -999999 to 999999
              The output file will be created if it does not exist or overwritten if it does exist.
 ```
-For example: $ unicornFind /tmp/infile.txt "(0,0,0" 100, /tmp/outfile.txt
+For example: $ unicornFind /tmp/infile.txt "(0,0,0)" 100, /tmp/outfile.txt
 ### Design Notes
 The input file is read sequentially and each coordinate is read from the input file only once in O(n) time. The smallest values encountered are maintained in a java  PriorityQueue. As such the enque and dequeuing times are O(log(n)) where n is the quantity desired to be maintained. Each time an element is added an enque and deque operation occurs. A constant time poll() oeration is also done.
 Thus the worst case number of operations would be one per record in the file if all of the points were stored sorted furthest away from the origin selected. The best case would be the quantity asked for there opposite were true. 
 
 #### Build Notes
-This is a java 1.8 project built using gradle 4.0. To build:
+This is a java 1.8 project built using gradle 4.0. Clone the repo into your local environment and you will be able to run the following gradle commands from the home directory of the project. 
+
+To build:
 ```
 ./gradlew build
 ```
